@@ -32,3 +32,21 @@ jobs:
             # Add your deployment or script commands here
             # For example: cd /path/to/your/app && git pull
           EOF
+
+                # Copy the HTML file to the EC2 instance
+      - name: Copy HTML file to EC2
+        run: |
+          scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no index.html ec2-user@65.2.35.105:/home/ec2-user/
+ 
+      # Install a web server (nginx or apache) and serve the HTML file
+      - name: Install nginx and serve HTML file
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ec2-user@65.2.35.105 << 'EOF'
+            sudo yum update -y
+            sudo yum install -y nginx
+            sudo systemctl start nginx
+            sudo systemctl enable nginx
+            sudo mv /home/ec2-user/index.html /usr/share/nginx/html/index.html
+            sudo systemctl restart nginx
+          EOF
+          
