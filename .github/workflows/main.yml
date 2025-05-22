@@ -37,7 +37,7 @@ jobs:
       - name: Copy HTML file to EC2
         run: |
           scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no index.html ec2-user@54.161.142.5:/home/ec2-user/
-            scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no sr.py ec2-user@54.161.142.5:/home/ec2-user/
+            #scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no sr.py ec2-user@54.161.142.5:/home/ec2-user/
  
       # Install a web server (nginx or apache) and serve the HTML file
       - name: Install nginx and serve HTML file
