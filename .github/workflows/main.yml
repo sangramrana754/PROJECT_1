@@ -43,10 +43,6 @@ jobs:
       - name: Install nginx and serve HTML file
         run: |
           ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ec2-user@54.161.142.5 << 'EOF'
-            sudo yum update -y
-            sudo yum install -y nginx
-            sudo systemctl start nginx
-            sudo systemctl enable nginx
             sudo mv /home/ec2-user/index.html /usr/share/nginx/html/index.html
             sudo systemctl restart nginx
           EOF
